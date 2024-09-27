@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::controller(SiteController::class)->name('site.')->group(function () {
+    Route::get('/index', 'index')->name('index');
+    Route::get('/category', 'category')->name('category');
+    Route::get('/contact', 'contact')->name('contact');
+    Route::get('/single-blog', 'singleBlog')->name('singleBlog');
+    Route::get('/login', 'login')->name('login');
+    Route::get('/register', 'register')->name('register');
+});
 
 Route::get('/', function () {
     return view('welcome');
