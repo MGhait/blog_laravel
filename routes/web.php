@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SubscriberController;
@@ -27,6 +28,9 @@ Route::controller(SiteController::class)->name('site.')->group(function () {
 
 // SUBSCRIBER STORE ROUTE
 Route::post('/subscriber/store', [SubscriberController::class,'store'])->name('subscriber.store');
+
+// Contact STORE ROUTE
+Route::post('/contact/store', [ContactController::class,'store'])->name('contact.store');
 
 Route::get('/', function () {
     return view('site.index');
