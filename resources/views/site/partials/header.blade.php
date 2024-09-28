@@ -27,18 +27,27 @@
             </ul>
             
             <!-- Add new blog -->
-            <a href="#" class="btn btn-sm btn-primary mr-2">Add New</a>
+            <a href="#" class="btn btn-sm btn-primary mr-4">Add New</a>
             <!-- End - Add new blog -->
 
             <ul class="nav navbar-nav navbar-right navbar-social">
-              <a href="#" class="btn btn-sm btn-warning">Register / Login</a>
-              <!-- <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">Welcome User</a>
+              @if(!Auth::check())
+                <a href="{{ route('register') }}" class="btn btn-sm btn-warning"> Register / Login</a>
+              @else
+                <li class="nav-item submenu dropdown">
+                <a href="#" class="nav-link dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">{{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href=""{{ route('site.category') }}">My Blogs</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{{ route('site.category') }}">My Blogs</a></li>
+                  <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                      @csrf
+                      <a class="nav-link" href="javascript:$('form').submit();">Logut</a>
+                    </form>
+                  </li>
                 </ul>
-              </li> -->
+              @endif
+              </li>
             </ul>
           </div> 
         </div>

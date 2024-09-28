@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SubscriberController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// SITE ROUTES
 Route::controller(SiteController::class)->name('site.')->group(function () {
     Route::get('/index', 'index')->name('index');
     Route::get('/category', 'category')->name('category');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/single-blog', 'singleBlog')->name('singleBlog');
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
+
 });
 
+// SUBSCRIBER STORE ROUTE
+Route::post('/subscriber/store', [SubscriberController::class,'store'])->name('subscriber.store');
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
 });
 
 Route::get('/dashboard', function () {

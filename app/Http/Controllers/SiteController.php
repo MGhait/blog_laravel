@@ -23,11 +23,4 @@ class SiteController extends Controller
         return view('site.single-blog');
     }
 
-    public function login() {
-        return view('site.login');
-    }
-
-    public function register() {
-        return view('site.register');
-    }
 }
