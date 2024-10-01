@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
@@ -19,10 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 // SITE ROUTES
 Route::controller(SiteController::class)->name('site.')->group(function () {
+    Route::get('/', 'index')->name('index');
     Route::get('/index', 'index')->name('index');
-    Route::get('/category', 'category')->name('category');
+
+    Route::get('/category/{id}', 'category')->name('category');
     Route::get('/contact', 'contact')->name('contact');
-    Route::get('/single-blog', 'singleBlog')->name('singleBlog');
+    // Route::get('/single-blog', 'singleBlog')->name('singleBlog');
 
 });
 
@@ -32,9 +35,12 @@ Route::post('/subscriber/store', [SubscriberController::class,'store'])->name('s
 // Contact STORE ROUTE
 Route::post('/contact/store', [ContactController::class,'store'])->name('contact.store');
 
-Route::get('/', function () {
-    return view('site.index');
-});
+//BLOG ROUTES
+Route::resource('blogs', BlogController::class);
+
+// Route::get('/', function () {
+//     return view('site.index');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');

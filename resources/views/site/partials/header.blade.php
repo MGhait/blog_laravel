@@ -1,6 +1,5 @@
   @php
     $headerCategories = App\Models\Category::take(5)->get();
-
   @endphp
   
   <!--================Header Menu Area =================-->
@@ -26,7 +25,7 @@
                   <ul class="dropdown-menu">
                     @foreach ($headerCategories as $category)
                       <li class="nav-item">
-                        <a class="nav-link" href="{{ route('site.category') }}">{{ $category->name }}</a>
+                        <a class="nav-link" href="{{ route('site.category', ['id' => $category->id]) }}">{{ $category->name }}</a>
                       </li>
                     @endforeach
                   </ul>
@@ -36,7 +35,9 @@
             </ul>
             
             <!-- Add new blog -->
-            <a href="#" class="btn btn-sm btn-primary mr-4">Add New</a>
+            @if(Auth::check())
+              <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-primary mr-4">Add New</a>
+            @endif
             <!-- End - Add new blog -->
 
             <ul class="nav navbar-nav navbar-right navbar-social">
@@ -47,11 +48,12 @@
                 <a href="#" class="nav-link dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">{{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="{{ route('site.category') }}">My Blogs</a></li>
+                  {{-- {{ route('site.category') }} --}}
+                  <li class="nav-item"><a class="nav-link" href="{{ route('blogs.index') }}">My Blogs</a></li>
                   <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" id="logoutForm">
                       @csrf
-                      <a class="nav-link" href="javascript:$('form').submit();">Logut</a>
+                      <a class="nav-link" href="javascript:$('form#logoutForm').submit();">Logut</a>
                     </form>
                   </li>
                 </ul>

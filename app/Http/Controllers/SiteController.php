@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     
     public function index() {
-        return view('site.index');
+        $blogs = Blog::paginate(4);
+        return view('site.index', compact('blogs'));
     }
 
-    public function category() {
-        return view('site.category');
+    public function category($id) {
+        $categoryName= Category::find($id)->name;
+        $blogs = Blog::where('category_id', $id)->paginate(8);
+        return view('site.category', compact('blogs','categoryName'));
     }
 
     public function contact() {
         return view('site.contact');
     }
 
-    public function singleBlog() {
-        return view('site.single-blog');
-    }
 
 }
