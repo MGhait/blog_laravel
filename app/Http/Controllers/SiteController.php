@@ -11,7 +11,8 @@ class SiteController extends Controller
     
     public function index() {
         $blogs = Blog::paginate(4);
-        return view('site.index', compact('blogs'));
+        $sliderBlogs = Blog::latest()->take(5)->get();
+        return view('site.index', compact('blogs','sliderBlogs'));
     }
 
     public function category($id) {
