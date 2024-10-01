@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
@@ -38,6 +39,8 @@ Route::post('/contact/store', [ContactController::class,'store'])->name('contact
 //BLOG ROUTES
 Route::resource('blogs', BlogController::class);
 
+// COMMENT STORE ROUTE
+Route::post('/comment/store', [CommentController::class,'store'])->name('comments.store');
 // Route::get('/', function () {
 //     return view('site.index');
 // });
